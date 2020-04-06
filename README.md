@@ -16,6 +16,19 @@ request body : {"username":"username for user","password":"password for the acco
 
 response : 200 = success, 400 = failure
 
+# Retrieve list of all users, full-name, email, phone and role
+route : localhost:5000/api/user/list | method : GET
+
+request body : not required
+
+response : 200 = success
+
+# Update role of a user
+route : localhost:5000/api/user/role_update | method = POST
+
+request body : {"username":"username of user whose role is to be updated","role":"new role"}
+
+response : 200 = success 400 = failure
 # Add Post :
 route : localhost:5000/api/posts/add | method = POST
 
@@ -32,8 +45,22 @@ request body : {"post_id":"id of post to which comment is added", "author":"user
 
 response : 200 = success | 400 = failure
 
+# Upvote a post :
+route : localhost:5000/api/posts/upvote | method = POST
+
+request body: {"post_id":postid,"user": username of user who is upvoting}
+
+response : 200 = success | 201 = already voted | 400 failure
+
+# Downvote a post :
+route : localhost:5000/api/posts/downvote | method = POST
+
+request body: {"post_id":postid,"user": username of user who is downvoting}
+
+response : 200 = success | 201 = already voted | 400 failure
+
 # Retrieve a Post :
-route : localhost:5000/api/posts/<id> | GET
+route : localhost:5000/api/posts/id | GET
   
 request body : not required
   
@@ -54,3 +81,10 @@ route : localhost:5000/api/posts  | GET
 request body : not required
 
 response : a list of posts(post list may be empty if no post added). 200 - success
+
+# Retrieve all Posts by a user :
+route : localhost:5000/api/posts/user/user_name | GET
+
+request body : not required
+
+response : 200 - success | 400 - failure

@@ -41,6 +41,12 @@ def update_role():
     user.save()
     return "Role Modified",200
 
+# return a list of all users and their roles and full names
+@app.route('/api/user/list',methods=["GET"])
+def list_all_users():
+    user = User.objects.exclude("id","password","dob")
+    return jsonify(user),200
+
 # returns all posts
 # no requirements, just a get request returns a list of all posts
 @app.route('/api/posts', methods=['GET'])
@@ -57,6 +63,18 @@ def get_post(id):
             post = post[0]
             return jsonify(post),200
     return "Id does not match",404
+
+# API to retrieve all posts by a user
+# request body not required
+# response is a list of all posts by the user
+@app.route('/api/posts/user/<user_name>',methods=["GET"])
+def get_users_posts(user_name):
+    user = User.objects(username=user_name)
+    if len(user)==0:
+        return "User does not exist",400
+    else:
+        posts = Post.objects(author=user_name)
+        return jsonify(posts),200
 
 # add a post
 # requires {"author":"username of post writer","title":"title of post","description":"post details"}
@@ -93,5 +111,49 @@ def add_comment():
     post.comments.append(comment)
     post.save()
     return "Comment added successfully",200
+
+# upvote a post
+# request body : {"post_id":<postid>,"user":<username of user who is upvoting>}
+@app.route('/api/posts/upvote',methods=["POST"])
+def upvote_post():
+    body = request.get_json()
+    for i in ["post_id","user"]:
+        if i not in body:
+            return i+" required",400
+    post = Post.objects(id=body["post_id"])
+    if len(post)==0:
+        return "post does not exist",400
+    user = User.objects(username=body["user"])
+    if len(user)==0:
+        return "User does not exist",400
+    post=post[0]
+    if (body["user"] in post["upvotes"]) or (body["user"] in post["downvotes"]):
+        return "Already voted",201
+    post.votes = post.votes + 1
+    post.upvotes.append(body["user"])
+    post.save()
+    return "Upvoted Successfully",200
+
+# downvote a post
+# request body : {"post_id":<postid>,"user":<username of user who is downvoting>}
+@app.route('/api/posts/downvote',methods=["POST"])
+def downvote_post():
+    body = request.get_json()
+    for i in ["post_id","user"]:
+        if i not in body:
+            return i+" required",400
+    post = Post.objects(id=body["post_id"])
+    if len(post)==0:
+        return "post does not exist",400
+    user = User.objects(username=body["user"])
+    if len(user)==0:
+        return "User does not exist",400
+    post=post[0]
+    if (body["user"] in post["upvotes"]) or (body["user"] in post["downvotes"]):
+        return "Already voted",201
+    post.votes = post.votes - 1
+    post.downvotes.append(body["user"])
+    post.save()
+    return "Downvoted Successfully",200
 
 app.run(debug=True)
