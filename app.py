@@ -16,13 +16,30 @@ initialize_db(app)
 def add_user():
     body = request.get_json()
     for i in ["username","password","full_name"]:
-        if i not in body:
+        if i not in body or body[i]=="":
             return i+" required",400
     user = User.objects(username=body["username"])
     if len(user)!=0:
         return "Username already exists",400
     user = User(**body).save()
     return "User succesfully added",200
+
+# update a users role
+# default role is "student", we could have other roles like "teacher", "expert", "champion", etc
+# request body requires {"username":"username of user whose role is to be updated","role":"new role"}
+@app.route('/api/user/role_update',methods=["POST"])
+def update_role():
+    body = request.get_json()
+    for i in ["username","role"]:
+        if i not in body:
+            return i+" required",400
+    user = User.objects(username=body["username"])
+    if len(user)==0:
+        return "User does not exist",400
+    user = user[0]
+    user.role = body["role"]
+    user.save()
+    return "Role Modified",200
 
 # returns all posts
 # no requirements, just a get request returns a list of all posts
@@ -37,6 +54,7 @@ def get_post(id):
     if len(id)==24 and (match("[a-fA-F0-9]{24}",id)):
         post = Post.objects(id=id)
         if len(post)!=0:
+            post = post[0]
             return jsonify(post),200
     return "Id does not match",404
 
@@ -55,7 +73,6 @@ def add_post():
     post = Post(**body).save()
     id = post.id
     return jsonify({'id': str(id)}), 200
-
 
 # add a comment to a post
 # requires {"post_id":"id of post to which comment is added", "author":"username of comment writer", "description":"comment beng added"}
@@ -77,4 +94,4 @@ def add_comment():
     post.save()
     return "Comment added successfully",200
 
-app.run()
+app.run(debug=True)
