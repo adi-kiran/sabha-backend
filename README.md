@@ -16,19 +16,25 @@ request body : {"username":"username for user","password":"password for the acco
 
 response : 200 = success, 400 = failure
 
-# Add Post : localhost:5000/api/posts/add | method = POST
+# Add Post :
+route : localhost:5000/api/posts/add | method = POST
+
 request body : {"author":"username of post writer","title":"title of post","description":"post details"}
 
 response : 200 = success body = {'id': post_id}  | 400 =failure
 
 post_id must be stored in the frontend, and sent in body when comment/upvote/downvote on post is done
 
-# Add Comment to a post : localhost:5000/api/posts/comment/add | method = POST
+# Add Comment to a post :
+route : localhost:5000/api/posts/comment/add | method = POST
+
 request body : {"post_id":"id of post to which comment is added", "author":"username of comment writer", "description":"comment beng added"}
 
 response : 200 = success | 400 = failure
 
-# Retrieve a Post : localhost:5000/api/posts/<id> | GET
+# Retrieve a Post :
+route : localhost:5000/api/posts/<id> | GET
+  
 request body : not required
   
 response : { "_id": { "$oid": "5e8ad25d9e6029fcf8a2594f"},
@@ -42,7 +48,9 @@ response : { "_id": { "$oid": "5e8ad25d9e6029fcf8a2594f"},
              "votes": 0 (integer : upvotes-downvotes) }
 200 - success 400 - failure
 
-# Retrieve all Posts : localhost:5000/api/posts  | GET
+# Retrieve all Posts :
+route : localhost:5000/api/posts  | GET
+
 request body : not required
 
 response : a list of posts(post list may be empty if no post added). 200 - success
