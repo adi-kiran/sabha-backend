@@ -6,7 +6,7 @@ from re import match
 app = Flask(__name__)
 # configure database
 app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb://localhost:27017/hello'
+    'host': 'mongodb://localhost:27017/sabha_db'
 }
 initialize_db(app)
 
