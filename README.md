@@ -20,6 +20,7 @@ response : 200 = success, 400 = failure
 request body : {"author":"username of post writer","title":"title of post","description":"post details"}
 
 response : 200 = success body = {'id': post_id}  | 400 =failure
+
 post_id must be stored in the frontend, and sent in body when comment/upvote/downvote on post is done
 
 # Add Comment to a post : localhost:5000/api/posts/comment/add | method = POST
