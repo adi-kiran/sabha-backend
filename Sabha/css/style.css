@@ -157,7 +157,7 @@ ol {
 	padding: 17px 25px;
 	min-width: 170px;
 	color: #fff;
-	background: #2916e0;
+	background: #5ecea9;
 	line-height: 1;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -361,7 +361,7 @@ ol {
 }
 
 .site-logo {
-	background: #2916e0;
+	background: #5ecea9;
 	width: calc(100% - 90px);
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -431,7 +431,7 @@ ol {
 
 .main-menu ul li a:hover,
 .main-menu ul li a.active {
-	color: #2916e0;
+	color: #5ecea9;
 }
 
 .sm-footer {
@@ -484,7 +484,7 @@ ol {
 }
 
 .copyright-text a:hover {
-	color: #2916e0;
+	color: #5ecea9;
 }
 
 /*---------------------
@@ -529,7 +529,7 @@ ol {
 	padding: 4px 20px;
 	margin-bottom: 10px;
 	font-size: 12px;
-	color: #2916e0;
+	color: #5ecea9;
 	text-transform: uppercase;
 	font-weight: 600;
 	border-radius: 2px;
@@ -717,7 +717,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .about-section .about-left {
-	background: #2916e0;
+	background: #5ecea9;
 	-ms-flex: 0 0 47%;
 	-webkit-box-flex: 0;
 	flex: 0 0 47%;
@@ -838,7 +838,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .about-text h2 {
 	display: inline-block;
 	padding-bottom: 8px;
-	border-bottom: 3px solid #2916e0;
+	border-bottom: 3px solid #7af0c9;
 	margin-bottom: 20px;
 }
 
@@ -1004,7 +1004,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .gallery-filter li.active {
-	color: #2916e0;
+	color: #5ecea9;
 }
 
 .grid-sizer,
@@ -1154,7 +1154,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 }
 
 .fr-thumbnail-active {
-	border: 2px solid #2916e0;
+	border: 2px solid #5ecea9;
 }
 
 /*----------------
@@ -1246,7 +1246,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	margin-bottom: 10px;
 	font-size: 12px;
 	letter-spacing: 2px;
-	color: #2916e0;
+	color: #5ecea9;
 	text-transform: uppercase;
 	font-weight: 600;
 	border-radius: 2px;
@@ -1352,7 +1352,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	margin-bottom: 10px;
 	font-size: 12px;
 	letter-spacing: 2px;
-	color: #2916e0;
+	color: #5ecea9;
 	text-transform: uppercase;
 	font-weight: 600;
 	border-radius: 2px;
@@ -1384,7 +1384,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	text-align: center;
 	letter-spacing: 2px;
 	border-radius: 2px;
-	color: #2916e0;
+	color: #333;
 	background: #ebebeb;
 	-webkit-transition: 0.3s;
 	-o-transition: 0.3s;
@@ -1393,7 +1393,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 
 .post-cata:hover {
 	color: #fff;
-	background: #2916e0;
+	background: #b2b2b2;
 }
 
 .post-share span {
@@ -1410,14 +1410,14 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	height: 36px;
 	text-align: center;
 	padding-top: 8px;
-	color: #2916e0;
+	color: #5ecea9;
 	border-radius: 52px;
 	margin-left: 4px;
 	background: #ebebeb;
 }
 
 .post-share a:hover {
-	background: #2916e0;
+	background: #5ecea9;
 	color: #fff;
 }
 
@@ -1654,8 +1654,8 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 }
 
 .comment-option .single-comment-item .sc-text .comment-btn:hover {
-	background: #2916e0;
-	border-color: #2916e0;
+	background: #b2b2b2;
+	border-color: #b2b2b2;
 	color: #fff;
 }
 
@@ -1686,7 +1686,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 
 .comment-form form input:focus,
 .comment-form form textarea:focus {
-	border: 1px solid #2916e0;
+	border: 1px solid #50635c;
 }
 
 .comment-form form input::-webkit-input-placeholder,
@@ -1747,7 +1747,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: 500;
-	background: #2916e0;
+	background: #333;
 	border: none;
 	padding: 13px 37px 12px;
 	border-radius: 50px;
@@ -1809,7 +1809,7 @@ only screen and (min-width: 992px) and (max-width: 1200px),
 .contact-info i {
 	display: block;
 	font-size: 48px;
-	color: #2916e0;
+	color: #5ecea9;
 	margin-bottom: 20px;
 }
 
