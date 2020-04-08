@@ -88,3 +88,10 @@ route : localhost:5000/api/posts/user/user_name | GET
 request body : not required
 
 response : 200 - success | 400 - failure
+
+# Retrieve all Posts by a keyword :
+route : localhost:5000/api/posts/keyword/key_word | GET
+
+request body : not required
+
+response : 200 - success | 400 - failure

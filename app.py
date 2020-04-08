@@ -156,4 +156,15 @@ def downvote_post():
     post.save()
     return "Downvoted Successfully",200
 
+# API to retrieve all posts with a keyword
+# request body not required
+# response is a list of all posts with keyword
+@app.route('/api/posts/keyword/<key_word>',methods=["GET"])
+def get_posts_by_keyword(key_word):
+    posts = Post.objects.search_text(key_word)
+    if len(posts)==0:
+        return "No posts exist exist",400
+    else:
+        return jsonify(posts),200
+
 app.run(debug=True)
