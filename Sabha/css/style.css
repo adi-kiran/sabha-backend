@@ -157,7 +157,7 @@ ol {
 	padding: 17px 25px;
 	min-width: 170px;
 	color: #fff;
-	background: #5ecea9;
+	background: #1abc9c;
 	line-height: 1;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -361,7 +361,7 @@ ol {
 }
 
 .site-logo {
-	background: #5ecea9;
+	background: #1abc9c;
 	width: calc(100% - 90px);
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -431,7 +431,7 @@ ol {
 
 .main-menu ul li a:hover,
 .main-menu ul li a.active {
-	color: #5ecea9;
+	color: #1abc9c;
 }
 
 .sm-footer {
@@ -484,7 +484,7 @@ ol {
 }
 
 .copyright-text a:hover {
-	color: #5ecea9;
+	color: #1abc9c;
 }
 
 /*---------------------
@@ -529,7 +529,7 @@ ol {
 	padding: 4px 20px;
 	margin-bottom: 10px;
 	font-size: 12px;
-	color: #5ecea9;
+	color: #1abc9c;
 	text-transform: uppercase;
 	font-weight: 600;
 	border-radius: 2px;
@@ -717,7 +717,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .about-section .about-left {
-	background: #5ecea9;
+	background: #1abc9c;
 	-ms-flex: 0 0 47%;
 	-webkit-box-flex: 0;
 	flex: 0 0 47%;
@@ -838,7 +838,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .about-text h2 {
 	display: inline-block;
 	padding-bottom: 8px;
-	border-bottom: 3px solid #7af0c9;
+	border-bottom: 3px solid #1abc9c;
 	margin-bottom: 20px;
 }
 
@@ -1004,7 +1004,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .gallery-filter li.active {
-	color: #5ecea9;
+	color: #1abc9c;
 }
 
 .grid-sizer,
@@ -1154,7 +1154,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 }
 
 .fr-thumbnail-active {
-	border: 2px solid #5ecea9;
+	border: 2px solid #1abc9c;
 }
 
 /*----------------
@@ -1246,7 +1246,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	margin-bottom: 10px;
 	font-size: 12px;
 	letter-spacing: 2px;
-	color: #5ecea9;
+	color: #1abc9c;
 	text-transform: uppercase;
 	font-weight: 600;
 	border-radius: 2px;
@@ -1352,7 +1352,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	margin-bottom: 10px;
 	font-size: 12px;
 	letter-spacing: 2px;
-	color: #5ecea9;
+	color: #1abc9c;
 	text-transform: uppercase;
 	font-weight: 600;
 	border-radius: 2px;
@@ -1410,14 +1410,14 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 	height: 36px;
 	text-align: center;
 	padding-top: 8px;
-	color: #5ecea9;
+	color: #333;
 	border-radius: 52px;
 	margin-left: 4px;
 	background: #ebebeb;
 }
 
 .post-share a:hover {
-	background: #5ecea9;
+	background: #b2b2b2;
 	color: #fff;
 }
 
@@ -1809,7 +1809,7 @@ only screen and (min-width: 992px) and (max-width: 1200px),
 .contact-info i {
 	display: block;
 	font-size: 48px;
-	color: #5ecea9;
+	color: #1abc9c;
 	margin-bottom: 20px;
 }
 
