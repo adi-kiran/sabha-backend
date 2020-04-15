@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script>
+            // the name etc will be extracted from a form or from the page and it has to be sent like this to the api
+            url = "http://localhost:5000/api/user/add";
+            params = {"username":"hello","password":"hello","full_name":"hello world","email":"hello@world.com","phone":"1234567890"}
+            xhr = new XMLHttpRequest();
+            xhr.open("PUT",url, false);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+                else{
+                    console.log(this.responseText);
+                }
+            };
+            xhr.send(JSON.stringify(params));
+            // in case responseText is a variable, like a list of posts, you can make it as follows
+            // x = JSON.parse(this.responseText); console.log(x);
+            // x will now be a json object that can be accessed by normal javascript methods.
+        </script>
+    </head>
+</html>

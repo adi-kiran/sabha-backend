@@ -2,6 +2,7 @@ from flask import Flask, request, Response, jsonify
 from initialize_database import initialize_db
 from models import Post,User,Comment
 from re import match
+from flask_cors import CORS
 
 app = Flask(__name__)
 # configure database
@@ -9,6 +10,7 @@ app.config['MONGODB_SETTINGS'] = {
     'host': 'mongodb://localhost:27017/sabha_db'
 }
 initialize_db(app)
+cors = CORS(app)
 
 # add a user
 # requires {"username":"a unique username for the user","password":"password for the account","full_name":"users full name"}
