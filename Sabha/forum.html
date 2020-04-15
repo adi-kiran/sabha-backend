@@ -106,56 +106,62 @@ body {
 	</style>
 
 	<script>
-		var obj = {
-			xhr: new XMLHttpRequest(),
 
-			getPosts: function(){
-				// check
-				// $.ajax({
-				// 	type: "GET",
-				// 	url: '/api/posts/add',
-				// 	success: function(data) {
-						var div_post = document.getElementById("posts")
-						// return the post, author, content, timestamp and hastag if we're keeping a search and store it in arr
-						// var arr = data['collection_name'].split(';')
-						var title = document.createElement("h3");
-						var author = document.createElement("h5");
-						var content = document.createElement("h6");
-						var timestamp = document.createElement("h6")
-						// var hashtag = document.createElement("h4")
-						// hashtag 
-						// not sure of how you want to store/render votes
-						var upvotes = document.createElement("button");
-						upvotes.innerHTML = "upvote";
-						upvotes.onclick	= function(){
-							// increment upvotes value and reflect it 
-						}
-						var downvotes = document.createElement("button");
-						downvotes.innerHTML = "downvote";
-						downvotes.onclick	= function(){
-							// decrement downvotes value and reflect it 
-						}
+	function sendJSON(){ 
+		let xhr = new XMLHttpRequest(); 
+		let url = "http://localhost:5000/api/posts"; 
 
 
-						author.innerHTML = arr[0].split(',')[0];
-						title.innerHTML = arr[0].split(',')[1];
-						content.innerHTML = arr[0].split(',')[2];
-						timestampe.innerHTML = arr[0].split(',')[7];
-
-						div_post.appendChild(title);
-						div_post.appendChild(author);
-						div_post.appendChild(content);
-						div_post.appendChild(timestamp);
-						div_post.appendChild(upvotes);
-						div_post.appendChild(downvotes);
-					
-					},
-			// 	}
+		xhr.open("POST", url, true); 
+		xhr.setRequestHeader("Content-Type", "application/json"); 
+		xhr.onreadystatechange = function () { 
+		if (this.readyState === 4 && this.status === 200) { 
+			console.log(this.responseText);
+			var div_post = document.getElementById("posts")
+			// return the post, author, content, timestamp and hastag if we're keeping a search and store it in arr
+			// var arr = data['collection_name'].split(';')
+			var title = document.createElement("h3");
+			var author = document.createElement("h5");
+			var content = document.createElement("h6");
+			var timestamp = document.createElement("h6")
+			var upvotes = document.createElement("button");
+			upvotes.innerHTML = "upvote";
+			// upvotes.onclick	= function(){
+			// increment upvotes value and reflect it 
 			// }
-			
-		
-			
-		}
+			var downvotes = document.createElement("button");
+			downvotes.innerHTML = "downvote";
+			// downvotes.onclick	= function(){
+			// decrement downvotes value and reflect it 
+			// }
+
+			author.innerHTML = arr[0].split(',')[0];
+			title.innerHTML = arr[0].split(',')[1];
+			content.innerHTML = arr[0].split(',')[2];
+			timestampe.innerHTML = arr[0].split(',')[7];
+
+			div_post.appendChild(title);
+			div_post.appendChild(author);
+			div_post.appendChild(content);
+			div_post.appendChild(timestamp);
+			div_post.appendChild(upvotes);
+			div_post.appendChild(downvotes);
+					
+
+		   
+				$('.toast').toast('show');
+			}
+		else{
+			console.log(this.responseText);
+			}
+			   }; 
+			   
+	
+		xhr.send(data); 
+	} 
+
+
+						
 
 	</script>
 </head>
@@ -219,7 +225,7 @@ body {
 <!-- <div style="background-color:#1abc9c;"> -->
 <div style="background-color:#63e9ce;">
 
-	<div class="topnav">
+	<!-- <div class="topnav">
 		<a class="active" href="#home">Home</a>
 		<a href="#about">About</a>
 		<a href="#contact">Contact</a>
@@ -229,7 +235,7 @@ body {
 			<button type="submit"><i class="fa fa-search"></i></button>
 		  </form>
 		</div>
-	  </div>
+	  </div> -->
 	
 	<section class="blog-details">
 		<div class="container">
