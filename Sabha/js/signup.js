@@ -1,31 +1,24 @@
 function sendJSON(){ 
                
-    full_name = document.getElementById("fname"); 
-    username = document.getElementById("uname"); 
-    password = document.getElementById("pwd"); 
+    full_name = document.getElementById("fname").value; 
+    username = document.getElementById("uname").value; 
+    password = document.getElementById("pwd").value; 
        
-    // Creating a XHR object 
     let xhr = new XMLHttpRequest(); 
-    let url = "localhost:5000/api/user/add"; 
+    let url = "http://localhost:5000/api/user/add"; 
 
-    // open a connection 
-    xhr.open("PUT", url, true); 
-
-    // Set the request header i.e. which type of content you are sending 
+    xhr.open("POST", url, true); 
     xhr.setRequestHeader("Content-Type", "application/json"); 
-
-    // Create a state change callback 
     xhr.onreadystatechange = function () { 
-        if (xhr.readyState === 4 && xhr.status === 200) { 
-
-            // Do the necessary action
-
-        } 
+        if (this.readyState === 4 && this.status === 200) { 
+            console.log(this.responseText);
+            $('.toast').toast('show');
+        }
+        else{
+            console.log(this.responseText);
+        }
     }; 
-
-    // Converting JSON data to string 
-    var data = JSON.stringify({ "full_name": full_name.value, "username": username.value , "password": password.value }); 
-
-    // Sending data with the request 
+    
+    var data = JSON.stringify({ "full_name": full_name, "username": username , "password": password }); 
     xhr.send(data); 
 } 

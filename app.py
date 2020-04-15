@@ -11,10 +11,11 @@ app.config['MONGODB_SETTINGS'] = {
 }
 initialize_db(app)
 cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # add a user
 # requires {"username":"a unique username for the user","password":"password for the account","full_name":"users full name"}
-@app.route('/api/user/add', methods=['PUT'])
+@app.route('/api/user/add', methods=['POST'])
 def add_user():
     body = request.get_json()
     for i in ["username","password","full_name"]:
