@@ -109,10 +109,20 @@ body {
 		var obj = {
 
 			xhr: new XMLHttpRequest(),
-			postComment : function(){
 
-				var div = document.getElementById("add-comment")
-				var textbox = document.createElement("textarea")
+			getPosts: function(){
+				var div_post = document.getElementById("posts")
+				// return the post, author, content, timestamp and hastag if we're keeping a search and store it in arr
+				// var arr = 
+				var title = document.createElement("h3");
+				var author = document.createElement("h5");
+				var content = document.createElement("h6");
+				var timestamp = document.createElement("h6")
+				// not sure of how you want to store/render votes so I'm leaving this out 
+				// var upvotes = document.createElement("button");
+				// var downvotes = document.createElement("button");
+
+				title.innerHTML = arr[0].split(',')[1]
 
 
 			}
@@ -240,7 +250,8 @@ body {
 					</div>
 				</div> -->
 				<div class="about-text">
-					<h2>Posts</h2>
+					<h2>Posts </h2>
+					<div id = "posts">
 					<p>During your engagement shoot or portrait session I will assist and direct you through posing and expression to get you and your fiancée / partner comfortable in front of the camera so we can incorporate both posed and natural moments on your special day. </p>
 					<p>From a fashion forward shoot to a more reserved traditional style, I am here for you.</p>
 					<p>I love trying creative things in a fast paced environment. I adapt to any given situation and try to bring the beauty out that is already there. This is your day, lets have fun with it and make memories.</p>
@@ -248,6 +259,9 @@ body {
 					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.  By now I am literally o bring the beauty out that is already there. This is your day, lets have fun with it and make memories.</p>
 					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.  By now I am literally addicted to making photos…for which there is no known cure, except to make more.</p>
 					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.</p>
+
+					</div>
+					
 				</div>
 				<div class="row pt-5">
 					<div class="col-lg-6 mb-4">
@@ -352,7 +366,7 @@ body {
 					</div>
 				</div>
 				<div class="comment-form">
-					<!-- <h3>Leave A Comment</h3> -->
+					<h3>Leave A Comment</h3>
 					<form action="#">
 						<div class="row">
 							<!-- <div class="col-md-4">
@@ -365,8 +379,8 @@ body {
 								<input type="text" placeholder="Phone">
 							</div> -->
 							<div class="col-md-8" id="add-comment">
-								<!-- <textarea placeholder="Comment"></textarea> -->
-								<button type="submit" onclick="obj.postComment()">Leave A Comment</button>
+								<textarea placeholder="Comment"></textarea>
+								<button type="submit" >Submit</button>
 							</div>
 						</div>
 					</form>
