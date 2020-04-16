@@ -27,6 +27,21 @@ def add_user():
     user = User(**body).save()
     return "User succesfully added",200
 
+# signin api
+# requires {"username":username of user,"password":password of user}
+@app.route('/api/user/signin', methods=["POST"])
+def signin_user():
+    body = request.get_json()
+    if body["username"]=="" or body["password"]=="":
+        return "username and password required",400
+    user = User.objects(username=body["username"])
+    if len(user)==0:
+        return "invalid username",401
+    user = user[0]
+    if user["password"]!=body["password"]:
+        return "wrong password",402
+    return "Signed in successfully",200
+
 # update a users role
 # default role is "student", we could have other roles like "teacher", "expert", "champion", etc
 # request body requires {"username":"username of user whose role is to be updated","role":"new role"}
@@ -54,7 +69,7 @@ def list_all_users():
 # no requirements, just a get request returns a list of all posts
 @app.route('/api/posts', methods=['GET'])
 def get_all_posts():
-    posts = Post.objects()
+    posts = Post.objects().order_by('-timestamp')
     return jsonify(posts),200
 
 # returns a post with id = id (integer)
@@ -76,7 +91,7 @@ def get_users_posts(user_name):
     if len(user)==0:
         return "User does not exist",400
     else:
-        posts = Post.objects(author=user_name)
+        posts = Post.objects(author=user_name).order_by('-timestamp')
         return jsonify(posts),200
 
 # add a post
@@ -164,7 +179,7 @@ def downvote_post():
 # response is a list of all posts with keyword
 @app.route('/api/posts/keyword/<key_word>',methods=["GET"])
 def get_posts_by_keyword(key_word):
-    posts = Post.objects.search_text(key_word)
+    posts = Post.objects.search_text(key_word).order_by('-timestamp')
     if len(posts)==0:
         return "No posts exist exist",400
     else:

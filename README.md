@@ -16,6 +16,13 @@ request body : {"username":"username for user","password":"password for the acco
 
 response : 200 = success, 400 = failure
 
+# signin a user
+route : localhost:5000/api/user/signin | method : POST
+
+request body : {"username":"username for user","password":"password for the account"}
+
+response : 200 = success, 400 = username or password missing, 401 = invalid username, 402 = password wrong
+
 # Retrieve list of all users, full-name, email, phone and role
 route : localhost:5000/api/user/list | method : GET
 
@@ -75,21 +82,21 @@ response : { "_id": { "$oid": "5e8ad25d9e6029fcf8a2594f"},
              "votes": 0 (integer : upvotes-downvotes) }
 200 - success 400 - failure
 
-# Retrieve all Posts :
+# Retrieve all Posts : (latest added posts appear first)
 route : localhost:5000/api/posts  | GET
 
 request body : not required
 
 response : a list of posts(post list may be empty if no post added). 200 - success
 
-# Retrieve all Posts by a user :
+# Retrieve all Posts by a user : (latest added posts appear first)
 route : localhost:5000/api/posts/user/user_name | GET
 
 request body : not required
 
 response : 200 - success | 400 - failure
 
-# Retrieve all Posts by a keyword :
+# Retrieve all Posts by a keyword : (latest added posts appear first)
 route : localhost:5000/api/posts/keyword/key_word | GET
 
 request body : not required
