@@ -33,20 +33,16 @@ body {
 
 .topnav {
   overflow: hidden;
-  background-color:#333;
-  position: fixed;
-  width: 94%;
-  top: 0;
-  margin: 0;
-  padding: 0;
+  background-color: #e9e9e9;
 }
 
 .topnav a {
   float: left;
   display: block;
-  color: white;
+  color: black;
   text-align: center;
   padding: 14px 16px;
+  text-decoration: none;
   font-size: 17px;
 }
 
@@ -107,65 +103,168 @@ body {
 
 	<script>
 
-	function sendJSON(){ 
+	function getJSON(){ 
 		let xhr = new XMLHttpRequest(); 
 		let url = "http://localhost:5000/api/posts"; 
-
-
 		xhr.open("POST", url, true); 
 		xhr.setRequestHeader("Content-Type", "application/json"); 
 		xhr.onreadystatechange = function () { 
 		if (this.readyState === 4 && this.status === 200) { 
 			console.log(this.responseText);
-			var div_post = document.getElementById("posts")
-			// return the post, author, content, timestamp and hastag if we're keeping a search and store it in arr
-			// var arr = data['collection_name'].split(';')
-			var title = document.createElement("h3");
-			var author = document.createElement("h5");
-			var content = document.createElement("h6");
-			var timestamp = document.createElement("h6")
-			var upvotes = document.createElement("button");
-			upvotes.innerHTML = "upvote";
-			// upvotes.onclick	= function(){
-			// increment upvotes value and reflect it 
-			// }
-			var downvotes = document.createElement("button");
-			downvotes.innerHTML = "downvote";
-			// downvotes.onclick	= function(){
-			// decrement downvotes value and reflect it 
-			// }
+			var resTex = JSON.parse(this.responseText);
+			for(i = 0; i < resTex.length; i++)
+			{
+				var div_post = document.getElementById("posts");
+				var title = document.createElement("h3");
 
-			author.innerHTML = arr[0].split(',')[0];
-			title.innerHTML = arr[0].split(',')[1];
-			content.innerHTML = arr[0].split(',')[2];
-			timestampe.innerHTML = arr[0].split(',')[7];
+				var author = document.createElement("h5");
+				var br = document.createElement("br");
+				var content = document.createElement("h6");
+				var votes = document.createElement("h6");
+				title.style.fontWeight = 'bold';
+				upvotes.innerHTML = "upvote";
+				var downvotes = document.createElement("button");
+				downvotes.innerHTML = "downvote";
 
-			div_post.appendChild(title);
-			div_post.appendChild(author);
-			div_post.appendChild(content);
-			div_post.appendChild(timestamp);
-			div_post.appendChild(upvotes);
-			div_post.appendChild(downvotes);
+				
+				var id_post = resTex[i]["id"];
+				author.innerHTML = resTex[i]["author"];
+				title.innerHTML = resTex[i]["title"];
+				content.innerHTML = resTex[i]["description"];
+				votes.innerHTML = resTex[i]["votes"];
+				// upvotes.innerHTML = resTex[i]["upvotes"];
+				// downvotes.innerHTML = resTex[i]["downvotes"];
+				// votes.innerHTML = resTex[i]["votes"];
+				
+				div_post.appendChild(title);
+				div_post.appendChild(author);
+				div_post.appendChild(br);
+
+				title.setAttribute('data-toggle', 'modal');
+				title.setAttribute('data-target', '.bd-example-modal-lg');
+
+				// TODO FOR VARUN: send comments to the popup
+				// TODO FOR CHIRU: send the upvote and downvote to the popup
+
+				title.onclick = function (){loadPost(title,author,content,votes)}
+
+				
+					$('.toast').toast('show');
+			}
+		}	
+		else{
+			console.log(this.responseText);
+			}
+		}; 
+			   
+		var data = JSON.stringify({ "title": title, "author": author}); 
+		xhr.send(data); 
+	}
+
+
+	function loadPost(title,author,content,votes){ 
+		let xhr = new XMLHttpRequest(); 
+		let url = "http://localhost:5000/api/posts/id";  
+
+		xhr.open("GET", url, true); 
+		xhr.setRequestHeader("Content-Type", "application/json"); 
+		xhr.onreadystatechange = function () { 
+		if (this.readyState === 4 && this.status === 200) { 
+			console.log(this.responseText);
+			var bre = document.createElement("br")
+			var div_modal_body = document.getElementById("modal-body")
+			div_modal_body.appendChild(title)
+			div_modal_body.appendChild(br)
+			div_modal_body.appendChild(content)
+			div_modal_body.appendChild(br)
+			div_modal_body.appendChild(author)
+			div_modal_body.appendChild(br)
+			div_modal_body.appendChild(votes)
+
+			// Will have to do the same for upvotes and downvotes and possibly comments.
+
 					
-
-		   
 				$('.toast').toast('show');
 			}
 		else{
 			console.log(this.responseText);
 			}
-			   }; 
+			}; 
+			
+
+		xhr.send(); 
+}
+
+
+	function searchData(){ 
+               
+		keyword = document.getElementById("search").value; 
+				  
+		let xhr = new XMLHttpRequest(); 
+		let url = "http://localhost:5000/api/posts/keyword/key_word"; 
+		   
+		xhr.open("GET", url, true); 
+		xhr.setRequestHeader("Content-Type", "application/json"); 
+		xhr.onreadystatechange = function () { 
+		if (this.readyState === 4 && this.status === 200) { 
+			console.log(this.responseText);
+			var resTex = JSON.parse(this.responseText);
+			
+			for(i = 0; i < resTex.length; i++)
+			{
+				var div_post = document.getElementById("modal-search");
+				var title = document.createElement("h3");
+
+				var author = document.createElement("h5");
+				var br = document.createElement("br");
+				var content = document.createElement("h6");
+				var votes = document.createElement("h6");
+				title.style.fontWeight = 'bold';
+				upvotes.innerHTML = "upvote";
+				var downvotes = document.createElement("button");
+				downvotes.innerHTML = "downvote";
+
+				
+				var id_post = resTex[i]["id"];
+				author.innerHTML = resTex[i]["author"];
+				title.innerHTML = resTex[i]["title"];
+				content.innerHTML = resTex[i]["description"];
+				votes.innerHTML = resTex[i]["votes"];
+				// upvotes.innerHTML = resTex[i]["upvotes"];
+				// downvotes.innerHTML = resTex[i]["downvotes"];
+				// votes.innerHTML = resTex[i]["votes"];
+				
+				div_post.appendChild(title);
+				div_post.appendChild(author);
+				div_post.appendChild(br);
+
+				title.setAttribute('data-toggle', 'modal');
+				title.setAttribute('data-target', '.bd-example-modal-lg');
+
+				// TODO FOR VARUN: send comments to the popup
+				// TODO FOR CHIRU: send the upvote and downvote to the popup
+
+				title.onclick = function (){loadPost(title,author,content,votes)}
+
+				
+					$('.toast').toast('show');
+			}
+
+
+			}
+		else{
+			console.log(this.responseText);
+			}
+		}; 
 			   
-	
+		var data = JSON.stringify({ "full_name": full_name, "username": username , "password": password }); 
 		xhr.send(data); 
 	} 
 
-
-						
-
 	</script>
+
 </head>
-<body>
+<body onload = "getJSON()">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -221,146 +320,102 @@ body {
 	<!-- Blog Section end -->
 
 	
-
+	<div class="topnav">
+		<div class="search-container">
+		  <form>
+			<input type="text" placeholder="Search" name="search" id = "search">
+			<button type="submit" onclick="searchData()"  data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-search"></i></button>
+		  </form>
+		</div>
+	  </div>
 <!-- <div style="background-color:#1abc9c;"> -->
 <div style="background-color:#63e9ce;">
 
-	<!-- <div class="topnav">
-		<a class="active" href="#home">Home</a>
-		<a href="#about">About</a>
-		<a href="#contact">Contact</a>
-		<div class="search-container">
-		  <form action="/action_page.php">
-			<input type="text" placeholder="Search.." name="search">
-			<button type="submit"><i class="fa fa-search"></i></button>
-		  </form>
-		</div>
-	  </div> -->
+
 	
 	<section class="blog-details">
 		<div class="container">
 			<div class="single-blog-page">
-				<!-- <div class="blog-metas">
-					<div class="blog-meta">May 19, 2019</div>
-					<div class="blog-meta">3 Comment</div>
-				</div> -->
-				<!-- <div class="blog-thumb"> -->
-					<!-- <div class="thumb-cata">people</div> -->
-					<!-- <img src="img/blog-details/thumbnail.jpg" alt=""> -->
-				<!-- </div> -->
-				<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p> -->
-				<!-- <div class="row blog-gallery">
-					<div class="col-lg-3 p-0">
-						<div class="bg-item">
-							<img src="img/blog-details/1.jpg" alt="">
-						</div>
-					</div>
-					<div class="col-lg-9 p-0">
-						<div class="row m-0">
-							<div class="col-lg-4 p-0">
-								<div class="bg-item">
-									<img src="img/blog-details/2.jpg" alt="">
-								</div>
-							</div>
-							<div class="col-lg-8 p-0">
-								<div class="bg-item">
-									<img src="img/blog-details/3.jpg" alt="">
-								</div>	
-							</div>
-							<div class="col-lg-8 p-0">
-								<div class="bg-item">
-									<img src="img/blog-details/4.jpg" alt="">
-								</div>	
-							</div>
-							<div class="col-lg-4 p-0">
-								<div class="bg-item">
-									<img src="img/blog-details/5.jpg" alt="">
-								</div>	
-							</div>
-						</div>
-					</div>
-				</div> -->
 				<div class="about-text">
 					<h2>Posts </h2>
 					<div id = "posts">
-					<p>During your engagement shoot or portrait session I will assist and direct you through posing and expression to get you and your fiancée / partner comfortable in front of the camera so we can incorporate both posed and natural moments on your special day. </p>
+					<!-- <p>During your engagement shoot or portrait session I will assist and direct you through posing and expression to get you and your fiancée / partner comfortable in front of the camera so we can incorporate both posed and natural moments on your special day. </p>
 					<p>From a fashion forward shoot to a more reserved traditional style, I am here for you.</p>
 					<p>I love trying creative things in a fast paced environment. I adapt to any given situation and try to bring the beauty out that is already there. This is your day, lets have fun with it and make memories.</p>
 					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.  By now I am literally addicted to making photos…for which there is no known cure, except to make more.</p>
 					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.  By now I am literally o bring the beauty out that is already there. This is your day, lets have fun with it and make memories.</p>
-					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.  By now I am literally addicted to making photos…for which there is no known cure, except to make more.</p>
-					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.</p>
+					<p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.  By now I am literally addicted to making photos…for which there is no known cure, except to make more.</p> -->
+					<!-- <p>I have won a boatload of awards for my work, and I’m grateful for every single one of them, but I’ve always been unsure of whether I earned them or whether the jury was rigged.</p> -->
 
 					</div>
 					
 				</div>
 				<div class="row pt-5">
 					<div class="col-lg-6 mb-4">
-						<a href="#" class="post-cata">put tags here</a>
-						<a href="#" class="post-cata">put tags here</a>
-						<a href="#" class="post-cata">put tags here</a>
+						<a href="addpost.html" class="button">Add Post </a>
 					</div>
 					<div class="col-lg-6 mb-5 text-left text-md-right">
 						<div class="post-share">
 							<span>Share:</span>
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="www.facebook.com"><i class="fa fa-facebook"></i></a>
+							<a href="www.twitter.com"><i class="fa fa-twitter"></i></a>
 							<a href="#"><i class="fa fa-google-plus"></i></a>
-							<a href="#"><i class="fa fa-linkedin"></i></a>
-							<a href="#"><i class="fa fa-envelope"></i></a>
+							<a href="www.linkedin.com"><i class="fa fa-linkedin"></i></a>
+							<a href="www.gmail.com"><i class="fa fa-envelope"></i></a>
 						</div>
 					</div>
 				</div>
-				<!-- <div class="blog-navigation"> -->
-					<!-- <div class="row m-0">
-						<div class="col-lg-6 p-0">
-							<a href="#" class="bn-item set-bg" data-setbg="img/blog-details/blog-prev.jpg">
-								<h4><i class="ti-arrow-left"></i> The Female Body Shape Men Find Most Attractive</h4>
-							</a>
-						</div>
-						<div class="col-lg-6 p-0">
-							<a href="#" class="bn-item bn-next set-bg" data-setbg="img/blog-details/blog-next.jpg">
-								<h4><i class="ti-arrow-right"></i>Vietnam's largest art community</h4>
-							</a>
-						</div>
+
+
+			<!--Post  Modal -->
+			<h5 data-toggle="modal" data-target=".bd-example-modal-lg">click me </h5>
+			<div class="modal fade bd-example-modal-lg" id="longModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle" id = "modal-title">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 					</div>
-				</div> -->
-				<!-- <div class="recent-blog">
-					<h3 class="mb-4 pb-2">Recommended For You</h3>
-					<div class="row">
-						<div class="col-lg-4">
-							<div class="blog-item rp-item set-bg" data-setbg="img/blog/6.jpg">
-								<div class="bi-tag">nature</div>
-								<div class="bi-text">
-									<div class="bi-date">May 19, 2019 | 3 Comment</div>
-									<h3><a href="blog-details.html">The Biggest Cinema Event In 2019</a></h3>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="blog-item rp-item set-bg" data-setbg="img/blog/4.jpg">
-								<div class="bi-tag">nature</div>
-								<div class="bi-text">
-									<div class="bi-date">May 19, 2019 | 3 Comment</div>
-									<h3><a href="blog-details.html">The Biggest Cinema Event In 2019</a></h3>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="blog-item rp-item set-bg" data-setbg="img/blog/3.jpg">
-								<div class="bi-tag">nature</div>
-								<div class="bi-text">
-									<div class="bi-date">May 19, 2019 | 3 Comment</div>
-									<h3><a href="blog-details.html">The Biggest Cinema Event In 2019</a></h3>
-								</div>
-							</div>
-						</div>
+					<div class="modal-body" id = "modal-body">
+					...
 					</div>
-				</div> -->
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+			<!-- Modal End -->
+
+
+			<!--Search  Modal -->
+			<div class="modal fade bd-example-modal-lg" id="longModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle" id = "modal-title">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body" id = "modal-search">
+								...
+					</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	<!-- Modal End -->
+
 				<div class="comment-option" id ="comment">
-					<h3>Comments</h3>
+					<h3>Comment Section need to be worked on</h3>
 					<div class="single-comment-item first-comment">
 						<div class="sc-author">
 							<img src="img/blog-details/user-1.jpg" alt="">
@@ -411,13 +466,13 @@ body {
 							<div class="col-md-4">
 								<input type="text" placeholder="Phone">
 							</div> -->
-							<div class="col-md-8" id="add-comment">
+							<!-- <div class="col-md-8" id="add-comment">
 								<textarea placeholder="Comment"></textarea>
 								<button type="submit" >Submit</button>
 							</div>
 						</div>
 					</form>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>

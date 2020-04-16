@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>PESU | Sabha</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Tulen Photography HTML Template""cf>
+	<meta name="keywords" content="photo, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/themify-icons.css"/>
+	<link rel="stylesheet" href="css/accordion.css"/>
+	<link rel="stylesheet" href="css/fresco.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+        * {box-sizing: border-box;}
+        
+        /* Style inputs, select elements and textareas */
+input[type=text], select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Style the label to display next to the inputs */
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color:#7dacf3;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+/* Style the container */
+.container {
+  border-radius: 5px;
+  background-color: #63e9ce;;
+  padding: 20px;
+}
+
+/* Floating column for labels: 25% width */
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
+
+	</style>
+
+	<script>
+
+    function sendJSON(){ 
+               
+            author = localStorage.getItem("user");
+            title = document.getElementById("title").value; 
+            description= document.getElementById("description").value; 
+       
+            let xhr = new XMLHttpRequest(); 
+		    let url = "http://localhost:5000/api/posts/add"; 
+        	xhr.open("POST", url, true); 
+	    	xhr.setRequestHeader("Content-Type", "application/json"); 
+               xhr.onreadystatechange = function () { 
+                   if (this.readyState === 4 && this.status === 200) { 
+                       console.log(this.responseText);
+                       $('.toast').toast('show');
+                   }
+                   else{
+                       console.log(this.responseText);
+                   }
+               }; 
+            
+            var data = JSON.stringify({"author":author,"title": title,"description": title}); 
+            xhr.send(data); 
+           } 
+
+						
+
+	</script>
+</head>
+<body >
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Offcanvas Menu Section -->
+	<div class="menu-wrapper">
+		<div class="menu-switch">
+			<i class="ti-menu"></i>
+		</div>
+		<div class="menu-social-warp">
+			<div class="menu-social">
+				<a href="#"><i class="ti-facebook"></i></a>
+				<a href="#"><i class="ti-twitter-alt"></i></a>
+				<a href="#"><i class="ti-linkedin"></i></a>
+				<a href="#"><i class="ti-instagram"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="side-menu-wrapper">
+		<div class="sm-header">
+			<div class="menu-close">
+				<i class="ti-arrow-left"></i>
+			</div>
+			<a href="index.html" class="site-logo">
+				<!-- <img src="img/logo.png" alt=""> -->
+				<h3>Sabha</h3>
+			</a>
+		</div>
+		<nav class="main-menu">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="gallery.html">Gallery</a></li>
+				<li><a href="blog.html" class="active">Blog</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+		</nav>
+		<div class="sm-footer">
+			<div class="sm-socail">
+				<a href="#"><i class="ti-facebook"></i></a>
+				<a href="#"><i class="ti-twitter-alt"></i></a>
+				<a href="#"><i class="ti-linkedin"></i></a>
+				<a href="#"><i class="ti-instagram"></i></a>
+			</div>
+			<div class="copyright-text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+		</div>
+	</div>
+	<!-- Offcanvas Menu Section end -->
+
+	<!-- Blog Section end -->
+
+	
+
+<!-- <div style="background-color:#1abc9c;"> -->
+<div style="background-color:#63e9ce;">
+	
+	<section class="blog-details">
+		<div class="container">
+			<div class="single-blog-page">
+				<div class="about-text">
+					<h2> Add Post </h2>
+					<div id = "addpost">
+                        <div class="container">
+                            <form action="">
+                              <div class="row">
+                                <div class="col-25">
+                                  <label for="title"><b>Title</b></label>
+                                </div>
+                                <div class="col-75">
+                                  <input type="text" id="title" name="title" placeholder="Add Title">
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-25">
+                                  <label for="description"><b>Description</b></label>
+                                </div>
+                                <div class="col-75">
+                                  <textarea id="description" name="description" placeholder="Write Here" style="height:200px"></textarea>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <input type="submit" value="Submit" onclick = "sendJSON()">
+                              </div>
+                            </form>
+                          </div>
+                        
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+	<!-- Blog Section end -->
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/vendor/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/isotope.pkgd.min.js"></script>
+	<!-- <script src="js/jquery.nicescroll.min.js"></script> -->
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/pana-accordion.js"></script>
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
