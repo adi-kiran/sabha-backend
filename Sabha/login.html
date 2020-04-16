@@ -93,30 +93,32 @@
 
 			function signinf(){
 			  var xhr = new XMLHttpRequest();
-			  var url = 'http://localhost:5000/api/signin';
-			  email = document.getElementById("email").value;
+			  var url = 'http://localhost:5000/api/user/signin';
+			  username = document.getElementById("username").value;
 			  psw = document.getElementById("psw").value;
-			  params = {"email":email,"password":psw}
+			  params = {"username":username,"password":psw}
 			  xhr.open('POST', url, true);
 			  //Send the proper header information along with the request
 			  xhr.setRequestHeader('Content-type', 'application/json');
 			  xhr.onreadystatechange = function(){
 				if(this.readyState == 4 && this.status == 200) {
-					x = JSON.parse(this.responseText);
+					x = this.responseText;
 					console.log(x);
 					var d = new Date();
 					d.setTime(d.getTime() + (3*24*60*60*1000));
 					var expires = "expires="+ d.toUTCString();
-					document.cookie = "username=" + x["username"] + ';' + expires + ";path=/";
-					document.cookie = "email=" + x["email"] + ";"+ expires + ";path=/";
-					window.location.replace("Reroute/index.html");
-				  }
-				  else if(this.readyState == 4 && this.status == 400){
-					alert("Account does not exist!");
+					document.cookie = "username=" + username + ';' + expires + ";path=/";
+					window.location.replace("index.html");
 				  }
 				  else if(this.readyState == 4 && this.status == 401){
+					alert("Account does not exist!");
+				  }
+				  else if(this.readyState == 4 && this.status == 402){
 					alert("Seems like you have entered the wrong password!");
 				  }
+					else if(this.readyState == 4 && this.status == 400) {
+						alert("Enter Valid Details!");
+					}
 				};
 			  xhr.send(JSON.stringify(params));
 			}
@@ -184,8 +186,8 @@
 				<p style="color: white;">Please enter your credentials to sign in to our portal</p>
 				<hr>
 				
-				<label for="email" style="color: white;"><b>Email</b></label>
-				<input type="text" placeholder="Enter Email" name="email" id="email" required>
+				<label for="email" style="color: white;"><b>Username</b></label>
+				<input type="text" placeholder="Enter Email" name="username" id="username" required>
 			
 				<label for="psw" style="color: white;"><b>Password</b></label>
 				<input type="password" placeholder="Enter Password" name="password" id="psw" required>

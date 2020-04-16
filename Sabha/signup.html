@@ -93,30 +93,30 @@
 
         function signinf(){
           var xhr = new XMLHttpRequest();
-          var url = 'localhost:5000/api/user/add';
+          var url = 'http://localhost:5000/api/user/add';
           uname = document.getElementById("uname").value;
           psw = document.getElementById("psw").value;
           fname = document.getElementById("fname").value;
           email = document.getElementById("email").value;
-          params = "username:"+uname+','+"password:"+psw+','+"full_name:"+fname;
-          xhr.open('PUT', url, true);
+          params = {"username":uname,"password":psw,"full_name":fname};
+          xhr.open('POST', url, true);
           //Send the proper header information along with the request
           xhr.setRequestHeader('Content-type', 'application/json');
           xhr.onreadystatechange = function(){
           if(this.readyState == 4 && this.status == 200) {
-            x = JSON.parse(this.responseText);
+            x = this.responseText;
             console.log(x);
             var d = new Date();
             d.setTime(d.getTime() + (3*24*60*60*1000));
             var expires = "expires="+ d.toUTCString();
-            document.cookie = "username=" + uname + ";" + "email=" + email + ";" + expires + ";path=/";
+            document.cookie = "username=" + uname + ";" + expires + ";path=/";
             window.location.replace("index.html");
             }
             else if(this.readyState == 4 && this.status == 400){
-            alert("Account does not exist!");
+            alert("Username already registered!");
             }
             else if(this.readyState == 4 && this.status == 401){
-            alert("Seems like you have entered the wrong password!");
+            alert("Enter Valid Details!");
             }
           };
           xhr.send(JSON.stringify(params));

@@ -20,7 +20,7 @@ def add_user():
     body = request.get_json()
     for i in ["username","password","full_name"]:
         if i not in body or body[i]=="":
-            return i+" required",400
+            return i+" required",401
     user = User.objects(username=body["username"])
     if len(user)!=0:
         return "Username already exists",400
