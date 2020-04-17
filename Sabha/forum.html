@@ -106,7 +106,7 @@ body {
 	function getJSON(){ 
 		let xhr = new XMLHttpRequest(); 
 		let url = "http://localhost:5000/api/posts"; 
-		xhr.open("POST", url, true); 
+		xhr.open("GET", url, true); 
 		xhr.setRequestHeader("Content-Type", "application/json"); 
 		xhr.onreadystatechange = function () { 
 		if (this.readyState === 4 && this.status === 200) { 
@@ -122,6 +122,7 @@ body {
 				var content = document.createElement("h6");
 				var votes = document.createElement("h6");
 				title.style.fontWeight = 'bold';
+				var upvotes = document.createElement("button");
 				upvotes.innerHTML = "upvote";
 				var downvotes = document.createElement("button");
 				downvotes.innerHTML = "downvote";
@@ -157,8 +158,8 @@ body {
 			}
 		}; 
 			   
-		var data = JSON.stringify({ "title": title, "author": author}); 
-		xhr.send(data); 
+		// var data = JSON.stringify({ "title": title, "author": author}); 
+		xhr.send(); 
 	}
 
 
